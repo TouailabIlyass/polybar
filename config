@@ -18,11 +18,14 @@
 
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #222
-background-alt = #444
+background = #33222222
+;background-alt = #444
+background-alt = #bf1e1e1e
+background-icon = #fff
 ;foreground = ${xrdb:color7:#222}
 foreground = #dfdfdf
 foreground-alt = #555
+foreground-icon = #fff
 primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
@@ -30,7 +33,7 @@ alert = #bd2c40
 [bar/example]
 ;monitor = ${env:MONITOR:HDMI-1}
 width = 100%
-height = 27
+height = 20
 ;offset-x = 1%
 ;offset-y = 1%
 radius = 6.0
@@ -62,9 +65,9 @@ font-2 = FontAwesome:style=Regular:pixelsize=8"
 
 ;#####
 modules-left = i3
-;modules-center = mpd
+modules-center = xwindow
 ;modules-right = filesystem  alsa pulseaudio xkeyboard memory cpu wlan eth battery temperature date powermenu
-modules-right = filesystem  alsa pulseaudio xkeyboard memory cpu wlan eth battery  date powermenu
+modules-right =  filesystem  pulseaudio xkeyboard memory cpu wlan eth cbattery  date powermenu
 tray-position = right
 tray-padding = 2
 ;tray-background = #0063ff
@@ -93,7 +96,7 @@ blacklist-0 = num lock
 
 ;format-prefix = " "
 format-prefix = ""
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-foreground = ${colors.foreground-icon}
 format-prefix-underline = ${colors.secondary}
 
 label-layout = %layout%
@@ -110,7 +113,8 @@ interval = 25
 
 mount-0 = /
 
-label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
+;label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
+label-mounted = %free%
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
 
@@ -150,6 +154,7 @@ label-empty-padding = 2
 ;ws-icon-default = 
 [module/i3]
 type = internal/i3
+;enable-click = false
 ws-icon-0 = 0
 ws-icon-1 = 1
 ws-icon-2 = 2
@@ -225,7 +230,7 @@ bar-fill-font = 2
 bar-fill-foreground = #9f78e1
 bar-empty = ─
 bar-empty-font = 2
-bar-empty-foreground = ${colors.foreground-alt}
+bar-empty-foreground = ${colors.foreground-icon}
 
 [module/backlight-acpi]
 inherit = module/xbacklight
@@ -236,8 +241,8 @@ card = intel_backlight
 type = internal/cpu
 interval = 2
 ;format-prefix = " "
-format-prefix = ""
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix = ""
+format-prefix-foreground = ${colors.foreground-icon}
 format-underline = #f90000
 label = %percentage:2%%
 
@@ -246,7 +251,7 @@ type = internal/memory
 interval = 2
 ;format-prefix = " "
 format-prefix = ""
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-foreground = ${colors.foreground-icon}
 format-underline = #4bffdc
 label = %percentage_used%%
 
@@ -263,14 +268,14 @@ label-connected = %essid%
 format-disconnected = <label-disconnected>
 format-disconnected-underline = ${self.format-connected-underline}
 label-disconnected = %ifname% disconnected
-label-disconnected-foreground = ${colors.foreground-alt}
+label-disconnected-foreground = ${colors.foreground-icon}
 
 ramp-signal-0 = ""
 ramp-signal-1 = ""
 ramp-signal-2 = ""
 ramp-signal-3 = ""
 ramp-signal-4 = ""
-ramp-signal-foreground = ${colors.foreground-alt}
+ramp-signal-foreground = ${colors.foreground-icon}
 
 [module/eth]
 type = internal/network
@@ -279,7 +284,7 @@ interval = 3.0
 
 format-connected-underline = #55aa55
 ;format-connected-prefix = ""
-format-connected-prefix-foreground = ${colors.foreground-alt}
+format-connected-prefix-foreground = ${colors.foreground-icon}
 label-connected = %local_ip%
 
 format-disconnected =
@@ -299,7 +304,7 @@ time = %H:%M
 time-alt = %H:%M:%S
 
 format-prefix = ""
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-foreground = ${colors.foreground-icon}
 format-underline = #0a6cf5
 
 label = %date% %time%
@@ -330,7 +335,7 @@ bar-volume-fill = ─
 bar-volume-fill-font = 2
 bar-volume-empty = ─
 bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground-alt}
+bar-volume-empty-foreground = ${colors.foreground-icon}
 
 [module/alsa]
 type = internal/alsa
@@ -340,7 +345,7 @@ label-volume = VOL
 label-volume-foreground = ${root.foreground}
 
 format-muted-prefix = "  "
-format-muted-foreground = ${colors.foreground-alt}
+format-muted-foreground = ${colors.foreground-icon}
 label-muted = sound muted
 
 bar-volume-width = 10
@@ -358,40 +363,43 @@ bar-volume-fill = ─
 bar-volume-fill-font = 2
 bar-volume-empty = ─
 bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground-alt}
+bar-volume-empty-foreground = ${colors.foreground-icon}
 
-[module/battery]
-type = internal/battery
-battery = BAT0
-adapter = ADP1
-full-at = 98
+;[module/battery]
+;type = internal/battery
+;battery = BAT0
+;adapter = ADP1
+;full-at = 98
 
-format-charging = <animation-charging> <label-charging>
-format-charging-underline = #ffb52a
+;label-full = Fully charge
 
-format-discharging = <animation-discharging> <label-discharging>
-format-discharging-underline = ${self.format-charging-underline}
+;format-charging = <animation-charging> <label-charging>
+;format-charging-underline = #ffb52a
 
-format-full-prefix = ""
-format-full-prefix-foreground = ${colors.foreground-alt}
-format-full-underline = ${self.format-charging-underline}
+;format-discharging = "<animation-discharging> <label-discharging>"
+;format-discharging-underline = ${self.format-charging-underline}
 
-ramp-capacity-0 = ""
-ramp-capacity-1 = ""
-ramp-capacity-2 = ""
-ramp-capacity-foreground = ${colors.foreground-alt}
+;format-full-prefix = "x"
+;format-full-prefix-foreground = ${colors.foreground-icon}
+;format-full-underline = ${self.format-charging-underline}
 
-animation-charging-0 = ""
-animation-charging-1 = ""
-animation-charging-2 = ""
-animation-charging-foreground = ${colors.foreground-alt}
-animation-charging-framerate = 750
+;ramp-capacity-0 = "0"
+;ramp-capacity-1 = "1"
+;ramp-capacity-2 = "2"
+;ramp-capacity-foreground = ${colors.foreground-icon}
 
-animation-discharging-0 = ""
-animation-discharging-1 = ""
-animation-discharging-2 = ""
-animation-discharging-foreground = ${colors.foreground-alt}
-animation-discharging-framerate = 750
+;animation-charging-0 = ""
+;animation-charging-1 = ""
+;animation-charging-2 = ""
+;animation-charging-foreground = ${colors.foreground-icon}
+;animation-charging-framerate = 2000
+
+;animation-discharging-0 = ""
+;animation-discharging-1 = ""
+;animation-discharging-2 = ""
+;animation-discharging-foreground = ${colors.foreground-icon}
+;animation-discharging-framerate = 750
+;animation-discharging-framerate = 2000
 
 [module/temperature]
 type = internal/temperature
@@ -411,7 +419,7 @@ label-warn-foreground = ${colors.secondary}
 ramp-0 = ""
 ramp-1 = ""
 ramp-2 = ""
-ramp-foreground = ${colors.foreground-alt}
+ramp-foreground = ${colors.foreground-icon}
 
 [module/powermenu]
 type = custom/menu
@@ -425,7 +433,7 @@ label-open-foreground = ${colors.secondary}
 label-close = cancel
 label-close-foreground = ${colors.secondary}
 label-separator = |
-label-separator-foreground = ${colors.foreground-alt}
+label-separator-foreground = ${colors.foreground-icon}
 
 menu-0-0 = reboot
 menu-0-0-exec = menu-open-1
@@ -490,3 +498,10 @@ margin-bottom = 5
 ;label-active-foreground = ${color.acolor}
 ;label-urgent-foreground = ${color.curgent}
 ;label-occupied-foreground = ${color.coccupied}
+;;;;;;;;; custoom modules ;;;;;;;;;;;;;;;
+
+[module/cbattery]
+type = custom/script
+exec = ~/scripts/polybattery2
+label = "%output%"
+;;;;;;;;; end custom modules ;;;;;;;;;;;;;

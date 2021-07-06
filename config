@@ -18,17 +18,32 @@
 
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #33222222
+;background = #33222222
 ;background-alt = #444
 background-alt = #bf1e1e1e
 background-icon = #fff
 ;foreground = ${xrdb:color7:#222}
-foreground = #dfdfdf
+;foreground = #dfdfdf
 foreground-alt = #555
 foreground-icon = #fff
-primary = #ffb52a
-secondary = #e60053
-alert = #bd2c40
+;primary = #ffb52a
+;secondary = #e60053
+;alert = #bd2c40
+;;;;;;;;;;;;;
+;;https://github.com/makccr/dot/blob/master/.config/polybar/colors-dark.ini
+;;; dark
+background = #f0000000
+foreground = #d4be98
+primary = #fabd2f
+secondary = #fb4934
+alert = #cc241d
+;;; light
+;background = #50FFFFFF
+;foreground = #3c3836
+;primary = #d79921
+;secondary = #cc241d
+;alert = #9d0006
+;;;;;;;;;;;;;;
 
 [bar/example]
 ;monitor = ${env:MONITOR:HDMI-1}
@@ -97,15 +112,17 @@ blacklist-0 = num lock
 ;format-prefix = " "
 format-prefix = ""
 format-prefix-foreground = ${colors.foreground-icon}
-format-prefix-underline = ${colors.secondary}
+;format-prefix-underline = ${colors.secondary}
+format-prefix-underline = #9f78e1
 
 label-layout = %layout%
-label-layout-underline = ${colors.secondary}
-
+;label-layout-underline = ${colors.secondary}
+label-layout-underline = #9f78e1
 label-indicator-padding = 2
 label-indicator-margin = 1
 label-indicator-background = ${colors.secondary}
-label-indicator-underline = ${colors.secondary}
+;label-indicator-underline = ${colors.secondary}
+label-indicator-underline = #9f78e1
 
 [module/filesystem]
 type = internal/fs
@@ -504,4 +521,5 @@ margin-bottom = 5
 type = custom/script
 exec = ~/scripts/polybattery2
 label = "%output%"
+format-underline = ${colors.secondary}
 ;;;;;;;;; end custom modules ;;;;;;;;;;;;;
